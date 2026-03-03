@@ -1,0 +1,75 @@
+<div class="user-info-form horizontal">
+  <div class="form-header">
+    <div class="title-with-icon">
+      <svg class="profile-page-icon" xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="none" stroke="#6366f1" stroke-width="2.2" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M6 20c0-2.2 3.1-4 6-4s6 1.8 6 4"/>
+      </svg>
+      <h1 class="page-title">User Profile Information</h1>
+    </div>
+    <div class="page-subtitle">Complete your personal details for a better experience.</div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="createProfile()" autocomplete="off" novalidate>
+    <div class="form-row">
+      <div class="form-field">
+        <label>First Name</label>
+        <input type="text" formControlName="firstName" />
+        <div class="error" *ngIf="f['firstName'].touched && f['firstName'].invalid">
+          <span *ngIf="f['firstName'].errors?.['required']">First name is required.</span>
+          <span *ngIf="f['firstName'].errors?.['minlength']">At least 2 characters.</span>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Last Name</label>
+        <input type="text" formControlName="lastName" />
+        <div class="error" *ngIf="f['lastName'].touched && f['lastName'].invalid">
+          <span *ngIf="f['lastName'].errors?.['required']">Last name is required.</span>
+          <span *ngIf="f['lastName'].errors?.['minlength']">At least 2 characters.</span>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Phone</label>
+        <input type="text" formControlName="phone" maxlength="11" />
+        <div class="error" *ngIf="f['phone'].touched && f['phone'].invalid">
+          <span *ngIf="f['phone'].errors?.['required']">Phone number is required.</span>
+          <span *ngIf="f['phone'].errors?.['pattern']">Enter a valid Egyptian phone number.</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>City</label>
+        <input type="text" formControlName="city" />
+        <div class="error" *ngIf="f['city'].touched && f['city'].invalid">
+          <span *ngIf="f['city'].errors?.['required']">City is required.</span>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Region</label>
+        <input type="text" formControlName="region" />
+        <div class="error" *ngIf="f['region'].touched && f['region'].invalid">
+          <span *ngIf="f['region'].errors?.['required']">Region is required.</span>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Street</label>
+        <input type="text" formControlName="street" />
+        <div class="error" *ngIf="f['street'].touched && f['street'].invalid">
+          <span *ngIf="f['street'].errors?.['required']">Street is required.</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field image-field">
+        <label>Profile Image</label>
+        <input type="file" (change)="onFileChange($event)" accept="image/*"/>
+        <img *ngIf="imgPreview" [src]="imgPreview" alt="Profile preview" class="profile-preview" />
+      </div>
+      <div class="form-field submit-field">
+        <button type="submit" [disabled]="isSubmitting">Create Profile</button>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+</div>

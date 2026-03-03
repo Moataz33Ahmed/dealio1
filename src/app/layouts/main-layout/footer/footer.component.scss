@@ -1,0 +1,392 @@
+// Clean Professional Canto Footer - Optimized by tareksamy196 at 2025-08-06 19:33:15
+
+.canto-footer-clean {
+  background: linear-gradient(135deg, #4285f4 0%, #667eea 100%);
+  color: white;
+  margin-top: auto;
+  
+  .footer-main {
+    padding: 50px 0 30px;
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+        gap: 40px;
+        
+        .footer-section {
+          
+          // Company Section
+          &.company-section {
+            .footer-logo {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 20px;
+              
+              .logo-icon {
+                width: 44px;
+                height: 44px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                mat-icon {
+                  font-size: 22px;
+                  color: white;
+                }
+              }
+              
+              .logo-content {
+                .logo-text {
+                  font-size: 26px;
+                  font-weight: 700;
+                  margin: 0;
+                  color: white;
+                }
+                
+                .logo-tagline {
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: rgba(255, 255, 255, 0.8);
+                  margin: 0;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+              }
+            }
+            
+            .company-description {
+              font-size: 14px;
+              line-height: 1.6;
+              color: rgba(255, 255, 255, 0.9);
+              margin-bottom: 25px;
+            }
+            
+            .social-links {
+              .social-title {
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: white;
+              }
+              
+              .social-icons {
+                display: flex;
+                gap: 8px;
+                
+                .social-icon-btn {
+                  width: 40px;
+                  height: 40px;
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: 8px;
+                  color: white;
+                  transition: all 0.3s ease;
+                  
+                  &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
+                  }
+                  
+                  mat-icon {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+          
+          // Links Sections
+          &.links-section {
+            .section-title {
+              font-size: 16px;
+              font-weight: 600;
+              margin-bottom: 16px;
+              color: white;
+            }
+            
+            .footer-links {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+              
+              li {
+                margin-bottom: 10px;
+                
+                .footer-link {
+                  color: rgba(255, 255, 255, 0.8);
+                  text-decoration: none;
+                  font-size: 14px;
+                  transition: all 0.3s ease;
+                  
+                  &:hover {
+                    color: white;
+                    padding-left: 4px;
+                  }
+                }
+              }
+            }
+          }
+          
+          // Newsletter Section
+          &.newsletter-section {
+            .section-title {
+              font-size: 16px;
+              font-weight: 600;
+              margin-bottom: 12px;
+              color: white;
+            }
+            
+            .newsletter-description {
+              font-size: 14px;
+              color: rgba(255, 255, 255, 0.8);
+              margin-bottom: 18px;
+              line-height: 1.5;
+            }
+            
+            .newsletter-form {
+              .email-input-wrapper {
+                display: flex;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 25px;
+                padding: 5px 5px 5px 15px;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                }
+                
+                .email-icon {
+                  color: #666;
+                  margin-right: 10px;
+                  font-size: 18px;
+                }
+                
+                .email-input {
+                  flex: 1;
+                  border: none;
+                  outline: none;
+                  padding: 10px;
+                  font-size: 14px;
+                  background: transparent;
+                  color: #333;
+                  
+                  &::placeholder {
+                    color: #999;
+                  }
+                }
+                
+                .subscribe-btn {
+                  width: 40px;
+                  height: 40px;
+                  background: #4285f4;
+                  border: none;
+                  border-radius: 50%;
+                  color: white;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  transition: all 0.3s ease;
+                  
+                  &:hover {
+                    background: #3367d6;
+                    transform: scale(1.05);
+                  }
+                  
+                  mat-icon {
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .footer-bottom {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      
+      .footer-divider {
+        border-color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 20px;
+      }
+      
+      .footer-bottom-content {
+        text-align: center;
+        
+        .copyright-section {
+          .copyright-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            
+            .developed-by {
+              color: rgba(255, 255, 255, 0.9);
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Enhanced Responsive Design
+@media (max-width: 1024px) {
+  .canto-footer-clean .footer-main .footer-container .footer-top {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    
+    .company-section {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 20px;
+      
+      .footer-logo {
+        justify-content: center;
+      }
+      
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .canto-footer-clean {
+    .footer-main {
+      padding: 40px 0 25px;
+      
+      .footer-container .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        text-align: center;
+        
+        .newsletter-section {
+          grid-column: 1 / -1;
+          margin-top: 20px;
+        }
+      }
+    }
+    
+    .footer-bottom {
+      padding: 15px 0;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .canto-footer-clean {
+    .footer-main {
+      padding: 30px 0 20px;
+      
+      .footer-container {
+        padding: 0 15px;
+        
+        .footer-top {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          
+          .footer-section {
+            &.company-section {
+              .footer-logo {
+                .logo-content .logo-text {
+                  font-size: 22px;
+                }
+              }
+            }
+            
+            &.links-section {
+              .section-title {
+                font-size: 15px;
+              }
+              
+              .footer-links li .footer-link {
+                font-size: 13px;
+              }
+            }
+            
+            &.newsletter-section {
+              .newsletter-form .email-input-wrapper {
+                .email-input {
+                  font-size: 13px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .footer-bottom .footer-container {
+      padding: 0 15px;
+      
+      .copyright-text {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+// Accessibility & Performance
+.canto-footer-clean {
+  // Focus states
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  // Smooth scrolling
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  // Optimized transitions
+  .footer-section,
+  .social-icon-btn,
+  .footer-link,
+  .subscribe-btn {
+    will-change: transform;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .canto-footer-clean {
+    border-top: 3px solid white;
+    
+    .social-icon-btn,
+    .footer-link {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .canto-footer-clean * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

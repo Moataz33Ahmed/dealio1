@@ -1,0 +1,132 @@
+<div class="register-container">
+  <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)" autocomplete="off" novalidate>
+    <h2>Register</h2>
+    <div class="input-group">
+      <label for="email" class="field-label">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path stroke="#4285f4" stroke-width="2" d="M4 4h16v16H4V4zm2 4l8 6 8-6"/></svg>
+        Email
+      </label>
+      <input
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+        type="email"
+        placeholder="Enter your email"
+        required
+        #email="ngModel"
+        [class.input-error]="email.invalid && (email.touched || email.dirty)"
+      />
+      <span *ngIf="email.invalid && (email.touched || email.dirty)" class="input-validation">
+        <span *ngIf="email.errors?.['required']">Email is required.</span>
+        <span *ngIf="email.errors?.['email']">Please enter a valid email address.</span>
+      </span>
+    </div>
+    <div class="input-group">
+      <label for="username" class="field-label">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#4285f4" stroke-width="2"/><path stroke="#4285f4" stroke-width="2" d="M4 20c0-4 8-4 8-4s8 0 8 4"/></svg>
+        Username
+      </label>
+      <input
+        id="username"
+        name="username"
+        [(ngModel)]="user.username"
+        placeholder="Enter your username"
+        required
+        minlength="3"
+        #username="ngModel"
+        [class.input-error]="username.invalid && (username.touched || username.dirty)"
+      />
+      <span *ngIf="username.invalid && (username.touched || username.dirty)" class="input-validation">
+        <span *ngIf="username.errors?.['required']">Username is required.</span>
+        <span *ngIf="username.errors?.['minlength']">Username must be at least 3 characters.</span>
+      </span>
+    </div>
+    <div class="input-group">
+      <label for="password" class="field-label">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="12" rx="2" stroke="#4285f4" stroke-width="2"/><path stroke="#4285f4" stroke-width="2" d="M8 12v2m8-2v2"/></svg>
+        Password
+      </label>
+      <input
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        type="password"
+        placeholder="Enter your password"
+        required
+        minlength="6"
+        #password="ngModel"
+        [class.input-error]="password.invalid && (password.touched || password.dirty)"
+      />
+      <span *ngIf="password.invalid && (password.touched || password.dirty)" class="input-validation">
+        <span *ngIf="password.errors?.['required']">Password is required.</span>
+        <span *ngIf="password.errors?.['minlength']">Password must be at least 6 characters.</span>
+      </span>
+    </div>
+    <div class="input-group">
+      <label for="confirmPassword" class="field-label">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="8" width="16" height="12" rx="2" stroke="#4285f4" stroke-width="2"/><path stroke="#4285f4" stroke-width="2" d="M8 12v2m8-2v2"/><path stroke="#10b981" stroke-width="3" d="M8 17l2 2 4-4"/></svg>
+        Confirm Password
+      </label>
+      <input
+        id="confirmPassword"
+        name="confirmPassword"
+        [(ngModel)]="user.confirmPassword"
+        type="password"
+        placeholder="Confirm your password"
+        required
+        #confirmPassword="ngModel"
+        [class.input-error]="(user.password !== user.confirmPassword && confirmPassword.touched) || (confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty))"
+      />
+      <span *ngIf="confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)" class="input-validation">
+        <span *ngIf="confirmPassword.errors?.['required']">Confirmation is required.</span>
+      </span>
+      <span *ngIf="user.password !== user.confirmPassword && confirmPassword.touched" class="input-validation">
+        Passwords do not match.
+      </span>
+    </div>
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+    <button type="submit" [disabled]="isLoading || registerForm.invalid">
+      <span *ngIf="!isLoading">Register</span>
+      <span *ngIf="isLoading">Loading...</span>
+    </button>
+    <div class="below-action">
+      Already have an account?
+      <a routerLink="/sign-in" class="signin-link">Sign In</a>
+    </div>
+  </form>
+
+  <!-- Popup Success Message - PRO STYLE -->
+  <div class="popup-message-pro" *ngIf="showPopup">
+    <button class="popup-close" (click)="showPopup = false" aria-label="Close">
+      <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e0e7ff"/><path stroke="#6366f1" stroke-width="2.5" stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/></svg>
+    </button>
+    <span class="popup-icon">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <circle cx="22" cy="22" r="22" fill="url(#blue-gradient)" />
+        <g filter="url(#shadow)">
+          <rect x="12" y="18" width="20" height="12" rx="3.5" fill="#fff"/>
+          <path d="M12 18l10 7 10-7" stroke="#6366f1" stroke-width="2" fill="none"/>
+        </g>
+        <defs>
+          <linearGradient id="blue-gradient" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#38bdf8"/>
+            <stop offset="1" stop-color="#6366f1"/>
+          </linearGradient>
+          <filter id="shadow" x="0" y="10" width="44" height="32" filterUnits="userSpaceOnUse">
+            <feOffset dy="2"/>
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feBlend in="SourceGraphic" in2="blur" mode="normal"/>
+          </filter>
+        </defs>
+      </svg>
+    </span>
+    <div class="popup-content">
+      <div class="popup-title">Success!</div>
+      <div class="popup-text">
+        We've sent an email to your inbox to verify your email address and activate your account.
+        <br>
+        <span class="expire-msg">The link in the email will expire in 24 hours.</span>
+      </div>
+    </div>
+  </div>
+</div>

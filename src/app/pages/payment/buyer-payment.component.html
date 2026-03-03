@@ -1,0 +1,91 @@
+<div class="buyer-payment-page">
+  <div class="gradient-header">
+    <div class="header-icon">
+      <svg width="60" height="60" fill="none" stroke="#fff" stroke-width="2.7" viewBox="0 0 24 24">
+        <rect x="2" y="6" width="20" height="12" rx="4"/>
+        <path d="M2 10h20"/>
+        <path d="M7 15h0.01"/>
+        <path d="M17 15h0.01"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Complete<br><span>Your Payment</span></h1>
+      <p>Secure checkout. Your information is encrypted and safe.<br>
+        Please enter your payment details to finalize your purchase.
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()" autocomplete="off" novalidate>
+    <div class="payment-card">
+      <div class="secure-strip">
+        <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2.2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span>SSL Secured & Encrypted</span>
+      </div>
+      <div class="card-fields">
+        <div class="field-row">
+          <label>
+            <svg width="19" height="19" fill="none" stroke="#6366f1" stroke-width="2" viewBox="0 0 24 24" style="margin-right:5px;">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <path d="M2 10h20"/>
+            </svg>
+            <span>Payment Method</span>
+          </label>
+          <select formControlName="paymentMethod" class="custom-select">
+            <option value="" disabled>Select payment method</option>
+            <option value="Visa">Visa</option>
+            <option value="Mastercard">Mastercard</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Apple Pay">Apple Pay</option>
+          </select>
+          <div class="error" *ngIf="f['paymentMethod'].touched && f['paymentMethod'].invalid">
+            <span *ngIf="f['paymentMethod'].errors?.['required']">Payment method is required.</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <label>
+            <svg width="19" height="19" fill="none" stroke="#38bdf8" stroke-width="2" viewBox="0 0 24 24" style="margin-right:5px;">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <path d="M8 10h8"/>
+              <path d="M8 14h8"/>
+            </svg>
+            <span>Card Info</span>
+          </label>
+          <input type="text" formControlName="cardInfo" inputmode="numeric" maxlength="19" placeholder="Card number or PayPal email" class="card-input"/>
+          <div class="error" *ngIf="f['cardInfo'].touched && f['cardInfo'].invalid">
+            <span *ngIf="f['cardInfo'].errors?.['required']">Card info is required.</span>
+            <span *ngIf="f['cardInfo'].errors?.['minlength']">Enter a valid card number or email.</span>
+          </div>
+        </div>
+        <div class="field-row submit-row">
+          <button type="submit" [disabled]="isLoading" class="pay-btn">
+            <svg width="19" height="19" fill="none" stroke="#fff" stroke-width="2.3" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 7px;">
+              <rect x="2" y="7" width="20" height="10" rx="2"/>
+              <path d="M2 11h20"/>
+            </svg>
+            <span>Pay Now</span>
+          </button>
+        </div>
+        <div *ngIf="successMsg" class="success">
+          <svg width="20" height="20" fill="none" stroke="#22c55e" stroke-width="2.1" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:5px;">
+            <circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/>
+          </svg>
+          {{ successMsg }}
+        </div>
+        <div *ngIf="errorMsg" class="error main-error">
+          <svg width="20" height="20" fill="none" stroke="#e53935" stroke-width="2.1" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:5px;">
+            <circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/>
+          </svg>
+          {{ errorMsg }}
+        </div>
+      </div>
+      <div class="payment-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="ApplePay" />
+      </div>
+    </div>
+  </form>
+</div>

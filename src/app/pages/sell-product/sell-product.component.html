@@ -1,0 +1,64 @@
+<div class="sell-product-page">
+  <form #sellForm="ngForm" (ngSubmit)="onSubmit(sellForm)" class="sell-product-form" autocomplete="off">
+    <div class="form-header">
+      <div class="icon-circle">
+        <svg width="38" height="38" fill="none"><circle cx="19" cy="19" r="18" fill="#3C82F6"/><path d="M11 27V22.5C11 21.1193 12.1193 20 13.5 20H24.5C25.8807 20 27 21.1193 27 22.5V27M19 16C21.7614 16 24 13.7614 24 11C24 8.23858 21.7614 6 19 6C16.2386 6 14 8.23858 14 11C14 13.7614 16.2386 16 19 16Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>Add a New Product</h2>
+      <p class="subtitle">Showcase your product beautifully and attract buyers!</p>
+    </div>
+    <div class="form-body">
+      <div class="field-row">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" name="name" [(ngModel)]="product.name" required placeholder="e.g. Apple AirPods Pro" [ngClass]="{'invalid': fieldErrors.name}">
+          <span *ngIf="fieldErrors.name" class="error-msg">Product name is required</span>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select name="categoryId" [(ngModel)]="product.categoryId" required [ngClass]="{'invalid': fieldErrors.categoryId}">
+            <option value="">Select category</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+          <span *ngIf="fieldErrors.categoryId" class="error-msg">Category is required</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="form-group">
+          <label>Price <span class="currency">EGP</span></label>
+          <input type="number" name="price" [(ngModel)]="product.price" min="1" required placeholder="e.g. 1200.00" [ngClass]="{'invalid': fieldErrors.price}">
+          <span *ngIf="fieldErrors.price" class="error-msg">Minimum price is 1 EGP</span>
+        </div>
+        <div class="form-group">
+          <label>Product Images</label>
+          <div class="custom-file">
+            <input type="file" id="images" #fileInput [multiple]="true" required (change)="handleFileInput(fileInput.files)">
+            <label for="images">
+              <svg width="20" height="20" style="vertical-align:middle;margin-right:7px;" fill="none">
+                <rect width="20" height="20" rx="5" fill="#fff" />
+                <path d="M6 14l3-4 3 4 3-6" stroke="#3C82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="7" cy="7" r="1" fill="#3C82F6"/>
+              </svg>
+              Choose Images
+            </label>
+          </div>
+          <div class="file-preview" *ngIf="selectedFiles.length">
+            <span *ngFor="let file of selectedFiles">{{file.name}}</span>
+          </div>
+          <span *ngIf="fieldErrors.images" class="error-msg">At least one image is required</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" [(ngModel)]="product.description" rows="3" required placeholder="Describe your product features, conditions, etc." [ngClass]="{'invalid': fieldErrors.description}"></textarea>
+        <span *ngIf="fieldErrors.description" class="error-msg">Description is required</span>
+      </div>
+    </div>
+    <button type="submit" [disabled]="isLoading" class="cta-btn">
+      <span *ngIf="isLoading"><span class="loader"></span> Submitting...</span>
+      <span *ngIf="!isLoading">Add Product</span>
+    </button>
+    <div *ngIf="successMsg" class="response-msg success">{{successMsg}}</div>
+    <div *ngIf="errorMsg" class="response-msg error">{{errorMsg}}</div>
+  </form>
+</div>

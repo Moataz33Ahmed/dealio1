@@ -1,0 +1,146 @@
+<div class="listed-products-page">
+  <h1 class="page-title">Listed Products</h1>
+
+  <div *ngIf="isLoading" class="loading-message">Loading products...</div>
+  <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
+  <div *ngIf="orderErrorMsg" class="order-error-message">{{ orderErrorMsg }}</div>
+
+  <div *ngIf="!isLoading && !errorMsg && products.length; else emptyList">
+    <div class="products-list">
+      <div class="product-card" *ngFor="let product of products">
+        <div class="product-details">
+          <div class="product-name" [title]="product.name">{{ product.name }}</div>
+          <div class="product-desc" *ngIf="product.description">
+            {{ product.description.length > 40 ? (product.description | slice:0:40) + '...' : product.description }}
+          </div>
+          <div class="product-price">
+            <span class="price-label">Price:</span>
+            <span class="price-value">{{ product.price | currency : "USD" : "symbol" : "1.0-0" }}</span>
+          </div>
+        </div>
+        <div class="product-actions">
+          <button class="edit-btn" (click)="onEdit(product)" title="Edit product">
+            <span class="material-icons" aria-hidden="true">edit</span>
+            Edit
+          </button>
+          <button class="delete-btn" (click)="onDelete(product)" title="Delete product">
+            <span class="material-icons" aria-hidden="true">delete</span>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyList>
+    <div class="empty-list-box empty-seller-list">
+      <h2 class="empty-title">You haven't listed any products yet!</h2>
+      <p class="empty-desc">Showcase your products and start selling.<br />Click below to add your first product.</p>
+      <a routerLink="/sell" class="add-product-btn">
+        <span class="material-icons" aria-hidden="true">add_circle</span>
+        Add Product
+      </a>
+    </div>
+  </ng-template>
+
+  <!-- Edit Modal -->
+  <div class="modal-backdrop" *ngIf="showEditModal">
+    <div class="modal-box">
+      <h3>Edit Product</h3>
+      <form *ngIf="selectedProduct" #editForm="ngForm" (ngSubmit)="saveEdit(editForm)">
+        <label>
+          Name:
+          <input 
+            [(ngModel)]="selectedProduct.name" 
+            name="name" 
+            required 
+            minlength="2"
+            maxlength="50"
+            #nameInput="ngModel"
+          />
+          <span class="validation-error" *ngIf="nameInput.invalid && nameInput.touched">
+            <span *ngIf="nameInput.errors?.['required']">Name is required.</span>
+            <span *ngIf="nameInput.errors?.['minlength']">Must be at least 2 characters.</span>
+            <span *ngIf="nameInput.errors?.['maxlength']">Max 50 characters.</span>
+          </span>
+        </label>
+        <label>
+          Description:
+          <textarea 
+            [(ngModel)]="selectedProduct.description" 
+            name="desc" 
+            required 
+            minlength="5"
+            maxlength="200"
+            #descInput="ngModel"
+          ></textarea>
+          <span class="validation-error" *ngIf="descInput.invalid && descInput.touched">
+            <span *ngIf="descInput.errors?.['required']">Description is required.</span>
+            <span *ngIf="descInput.errors?.['minlength']">Must be at least 5 characters.</span>
+            <span *ngIf="descInput.errors?.['maxlength']">Max 200 characters.</span>
+          </span>
+        </label>
+        <label>
+          Price:
+          <input 
+            type="number"
+            [(ngModel)]="selectedProduct.price" 
+            name="price" 
+            required 
+            min="1"
+            max="999999"
+            #priceInput="ngModel"
+          />
+          <span class="validation-error" *ngIf="priceInput.invalid && priceInput.touched">
+            <span *ngIf="priceInput.errors?.['required']">Price is required.</span>
+            <span *ngIf="priceInput.errors?.['min']">Minimum price is 1.</span>
+            <span *ngIf="priceInput.errors?.['max']">Maximum price is 999,999.</span>
+          </span>
+        </label>
+        <label>
+          Category:
+          <select 
+            [(ngModel)]="selectedProduct.categoryId" 
+            name="categoryId" 
+            required 
+            #categoryInput="ngModel"
+          >
+            <option value="" disabled>Select category</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+          <span class="validation-error" *ngIf="categoryInput.invalid && categoryInput.touched">
+            <span *ngIf="categoryInput.errors?.['required']">Category is required.</span>
+          </span>
+        </label>
+        <div class="modal-actions">
+          <button type="submit" [disabled]="editForm.invalid">
+            <span class="material-icons" aria-hidden="true">save</span>
+            Save
+          </button>
+          <button type="button" (click)="closeEditModal()">
+            <span class="material-icons" aria-hidden="true">cancel</span>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal-backdrop" *ngIf="showDeleteModal">
+    <div class="modal-box">
+      <h3>Delete Product</h3>
+      <p>Are you sure you want to delete <b>{{selectedProduct?.name}}</b>?</p>
+      <div class="modal-actions">
+        <button (click)="confirmDelete()">
+          <span class="material-icons" aria-hidden="true">delete_forever</span>
+          Yes, Delete
+        </button>
+        <button (click)="closeDeleteModal()">
+          <span class="material-icons" aria-hidden="true">close</span>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="rating-card">
+  <div class="rating-title">Rate this product</div>
+  <div class="rating-desc">Please rate and leave your comment below</div>
+
+  <form [formGroup]="ratingForm" (ngSubmit)="submitRating()">
+    <div class="stars-row">
+      <span *ngFor="let star of [].constructor(maxStars); let i = index"
+            (click)="selectStars(i + 1)"
+            [class.selected]="i < selectedStars"
+            class="star"
+            tabindex="0"
+            (keydown.enter)="selectStars(i + 1)">
+        ★
+      </span>
+    </div>
+    <div class="stars-label">
+      {{selectedStars ? 'You selected ' + selectedStars + ' star(s)' : 'Select rating'}}
+    </div>
+
+    <label for="comment" class="comment-label">Comment <span class="opt">(optional)</span></label>
+    <textarea
+      id="comment"
+      class="comment-field"
+      formControlName="comment"
+      rows="3"
+      placeholder="Write your comment..."></textarea>
+
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="success">
+      {{ successMessage }}
+    </div>
+
+    <button type="submit"
+            [disabled]="isLoading"
+            class="submit-btn">
+      {{ isLoading ? 'Submitting...' : 'Submit Rating' }}
+    </button>
+  </form>
+</div>

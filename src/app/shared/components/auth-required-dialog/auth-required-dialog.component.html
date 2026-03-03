@@ -1,0 +1,19 @@
+<div class="alert-backdrop" (click)="onCancel()">
+  <div class="alert-dialog" (click)="$event.stopPropagation()">
+    <button class="alert-close" (click)="onCancel()" aria-label="Close">
+      <svg width="22" height="22" viewBox="0 0 22 22">
+        <line x1="6" y1="6" x2="16" y2="16" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/>
+        <line x1="16" y1="6" x2="6" y2="16" stroke="#1976d2" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="alert-title">Sign In Required</div>
+    <div class="alert-message">
+      You need to <b>sign in</b> or <b>create an account</b> to sell a product.<br>
+      Please log in or register to continue.
+    </div>
+    <div class="alert-actions">
+      <button class="alert-btn main" (click)="onLogin()">Sign In</button>
+      <button class="alert-btn ghost" (click)="onSignup()">Create Account</button>
+    </div>
+  </div>
+</div>

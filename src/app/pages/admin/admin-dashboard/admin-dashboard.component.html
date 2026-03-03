@@ -1,0 +1,73 @@
+<div class="add-delivery-container">
+  <div class="add-delivery-form">
+    <h2>Add New Delivery</h2>
+    <form [formGroup]="deliveryForm" (ngSubmit)="submit()" autocomplete="off" enctype="multipart/form-data">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" formControlName="FirstName" type="text" placeholder="e.g. Sayed" />
+          <div class="error" *ngIf="deliveryForm.get('FirstName')?.invalid && deliveryForm.get('FirstName')?.touched">
+            First name is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" formControlName="LastName" type="text" placeholder="e.g. Ahmed" />
+          <div class="error" *ngIf="deliveryForm.get('LastName')?.invalid && deliveryForm.get('LastName')?.touched">
+            Last name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nationalId">National ID</label>
+          <input id="nationalId" formControlName="NationalId" type="text" maxlength="14" placeholder="e.g. 3010501260345" />
+          <div class="error" *ngIf="deliveryForm.get('NationalId')?.invalid && deliveryForm.get('NationalId')?.touched">
+            National ID is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" formControlName="Phone" type="text" maxlength="11" placeholder="e.g. 01288868504" />
+          <div class="error" *ngIf="deliveryForm.get('Phone')?.invalid && deliveryForm.get('Phone')?.touched">
+            Phone is required
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" formControlName="City" type="text" placeholder="e.g. El Saf" />
+          <div class="error" *ngIf="deliveryForm.get('City')?.invalid && deliveryForm.get('City')?.touched">
+            City is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="region">Region</label>
+          <input id="region" formControlName="Region" type="text" placeholder="e.g. El Saf" />
+          <div class="error" *ngIf="deliveryForm.get('Region')?.invalid && deliveryForm.get('Region')?.touched">
+            Region is required
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input id="street" formControlName="Street" type="text" placeholder="e.g. Dawood" />
+          <div class="error" *ngIf="deliveryForm.get('Street')?.invalid && deliveryForm.get('Street')?.touched">
+            Street is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="image-input">Profile Image (optional)</label>
+          <input id="image-input" type="file" accept="image/*" (change)="onFileChange($event)">
+        </div>
+      </div>
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Adding...' : 'Add Delivery' }}
+      </button>
+      <div class="api-error" *ngIf="errorMsg">{{ errorMsg }}</div>
+      <div class="api-success" *ngIf="successMsg">{{ successMsg }}</div>
+    </form>
+  </div>
+</div>

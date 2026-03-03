@@ -1,0 +1,120 @@
+.alert-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(25, 118, 210, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-dialog {
+  background: #fff;
+  border-radius: 16px;
+  min-width: 320px;
+  max-width: 95vw;
+  box-shadow: 0 8px 32px 0 rgba(25, 118, 210, 0.12), 0 1.5px 6px #0001;
+  position: relative;
+  padding: 38px 28px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alert-title {
+  font-size: 1.18rem;
+  font-weight: 900;
+  color: #1976d2;
+  margin-bottom: 7px;
+  text-align: center;
+}
+
+.alert-message {
+  color: #334155;
+  text-align: center;
+  font-size: 1.03rem;
+  margin-bottom: 22px;
+  line-height: 1.6;
+  b {
+    color: #1976d2;
+    font-weight: 700;
+  }
+}
+
+.alert-actions {
+  width: 100%;
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  margin-top: 0;
+  flex-wrap: wrap;
+}
+
+.alert-btn {
+  font-family: inherit;
+  font-size: 1.01rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  min-width: 120px;
+  padding: 11px 0;
+  transition: background 0.15s, color 0.15s, box-shadow 0.17s, transform 0.11s;
+  outline: none;
+  &.main {
+    background: linear-gradient(90deg, #1976d2 82%, #4285f4 100%);
+    color: #fff;
+    border: 1.5px solid #1976d2;
+    &:hover {
+      background: linear-gradient(90deg, #135cb1 80%, #3779d7 100%);
+      transform: translateY(-2px) scale(1.045);
+      box-shadow: 0 6px 18px #1976d210;
+    }
+  }
+  &.ghost {
+    background: #fff;
+    color: #1976d2;
+    border: 1.5px solid #1976d2;
+    &:hover {
+      background: #e3f0ff;
+      color: #135cb1;
+      transform: translateY(-2px) scale(1.045);
+      box-shadow: 0 6px 18px #1976d210;
+    }
+  }
+}
+
+.alert-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.14s;
+  z-index: 2;
+  &:hover {
+    background: #e3f0ff;
+  }
+  svg {
+    pointer-events: none;
+    display: block;
+  }
+}
+
+@media (max-width: 500px) {
+  .alert-dialog {
+    min-width: 92vw;
+    padding: 18px 2vw 11px 2vw;
+  }
+  .alert-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

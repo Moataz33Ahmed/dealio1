@@ -1,0 +1,231 @@
+body {
+  background: linear-gradient(120deg, #eaf1fc 0%, #d2e0fa 100%);
+}
+
+.rating-card {
+  max-width: 420px;
+  margin: 55px auto 0 auto;
+  background: linear-gradient(135deg, #f9fbfe 0%, #e7f1fc 100%);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.09);
+  padding: 35px 32px 38px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.18s;
+}
+
+.rating-card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating-card .rating-icon {
+  margin-bottom: 10px;
+}
+
+.rating-card .rating-icon svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 8px #ffd70029);
+}
+
+.rating-card .rating-title {
+  color: #18244a;
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.rating-card .rating-desc {
+  color: #6b7aa3;
+  font-size: 1.09rem;
+  font-weight: 500;
+  margin-bottom: 22px;
+  text-align: center;
+  letter-spacing: 0.6px;
+}
+
+.rating-card .stars-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 7px;
+  padding: 18px 0 2px 0;
+  background: none;
+  justify-content: center;
+}
+
+.rating-card .stars-row .star {
+  font-size: 2.9rem;
+  color: #dbeafe;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.18s, transform 0.14s;
+  padding: 0 4px;
+  outline: none;
+  border-radius: 6px;
+}
+
+.rating-card .stars-row .star:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.rating-card .stars-row .star.selected {
+  color: #ffd600;
+  transform: scale(1.16);
+  text-shadow: 0 2px 13px #ffd70070;
+}
+
+.rating-card .stars-row .star:hover {
+  color: #ffe066;
+  transform: scale(1.17);
+}
+
+.rating-card .stars-values {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 6px;
+  justify-content: center;
+}
+
+.rating-card .stars-values .star-value {
+  font-size: 1.18rem;
+  color: #8ba3d7;
+  font-weight: 600;
+  text-align: center;
+  width: 43px;
+  display: inline-block;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  transition: color 0.18s;
+}
+
+.rating-card .stars-label {
+  color: #38bdf8;
+  font-size: 1.09rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  min-height: 24px;
+  text-align: center;
+  letter-spacing: 0.6px;
+  transition: color 0.18s;
+}
+
+.rating-card .comment-label {
+  font-weight: 700;
+  color: #18244a;
+  margin-bottom: 2px;
+  font-size: 1.07rem;
+  align-self: flex-start;
+}
+
+.rating-card .comment-label .opt {
+  font-weight: 400;
+  font-size: 0.97em;
+  color: #8ba3d7;
+}
+
+.rating-card .comment-field {
+  width: 100%;
+  border-radius: 11px;
+  border: 2px solid #b3bcf6;
+  font-size: 1.02rem;
+  font-family: inherit;
+  padding: 11px 14px;
+  background: #f7f8fc;
+  resize: none;
+  transition: border-color 0.17s;
+  box-shadow: 0 1px 6px #c7dbfa1a;
+}
+
+.rating-card .comment-field:focus {
+  border-color: #38bdf8;
+  outline: none;
+  background: #eef2ff;
+}
+
+.rating-card .error {
+  color: #e53935;
+  font-size: 0.87rem;
+  font-weight: 500;
+  min-height: 15px;
+  margin-bottom: 2px;
+  text-align: left;
+  width: 100%;
+}
+
+.rating-card .success {
+  background: #e0f7fa;
+  color: #22c55e;
+  border: 1.5px solid #38bdf8;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+}
+
+.rating-card .submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 0 auto;
+  width: 60%;
+  min-width: 150px;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.17rem;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.09);
+  transition: background 0.17s, opacity 0.17s, color 0.17s;
+}
+
+.rating-card .submit-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%);
+  color: #ffd600;
+  opacity: 0.98;
+}
+
+.rating-card .submit-btn:disabled {
+  opacity: 0.66;
+  cursor: not-allowed;
+}
+
+.rating-card .submit-btn svg {
+  vertical-align: middle;
+}
+
+@media (max-width: 520px) {
+  .rating-card {
+    max-width: 99vw;
+    padding: 18px 8vw 22px 8vw;
+  }
+  .rating-card .stars-row {
+    font-size: 2.1rem;
+    gap: 15px;
+  }
+  .rating-card .stars-values {
+    gap: 15px;
+  }
+  .rating-card .submit-btn {
+    font-size: 1.03rem;
+    padding: 12px 0;
+    width: 100%;
+  }
+}

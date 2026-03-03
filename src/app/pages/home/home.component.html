@@ -1,0 +1,230 @@
+<!-- Beautiful Modern P2P Marketplace -->
+<div class="modern-marketplace">
+  
+  <!-- Beautiful Hero Section -->
+  <section class="hero-modern">
+    <div class="hero-slider">
+      <div 
+        *ngFor="let slide of heroSlides; let i = index"
+        class="hero-slide"
+        [class.active]="i === currentSlide"
+        [style.background-image]="'url(' + slide.image + ')'">
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+          <div class="container">
+            <div class="hero-text">
+              <span class="hero-badge">{{ slide.badge }}</span>
+              <h1 class="hero-title">{{ slide.title }}</h1>
+              <h2 class="hero-subtitle">{{ slide.subtitle }}</h2>
+              <p class="hero-description">{{ slide.description }}</p>
+              
+              <div class="hero-actions">
+                <button 
+                  mat-raised-button 
+                  class="primary-btn">
+                  <mat-icon>rocket_launch</mat-icon>
+                  {{ slide.buttonText }}
+                </button>
+                <button 
+                  mat-stroked-button 
+                  class="secondary-btn">
+                  <mat-icon>explore</mat-icon>
+                  Browse Items
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Hero Controls -->
+    <div class="hero-navigation">
+      <button 
+        mat-fab 
+        (click)="prevSlide()"
+        class="nav-btn prev">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      
+      <div class="slide-dots">
+        <button 
+          *ngFor="let slide of heroSlides; let i = index"
+          (click)="goToSlide(i)"
+          class="dot"
+          [class.active]="i === currentSlide">
+        </button>
+      </div>
+      
+      <button 
+        mat-fab 
+        (click)="nextSlide()"
+        class="nav-btn next">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </section>
+
+  <!-- Compact Statistics -->
+  <section class="stats-modern">
+    <div class="container">
+      <div class="stats-header">
+        <h2>Platform Insights</h2>
+        <p>Real-time marketplace performance</p>
+      </div>
+      
+      <div class="stats-grid">
+        <div 
+          *ngFor="let stat of platformStats; let i = index"
+          class="stat-card"
+          [style.--delay]="i * 0.1 + 's'">
+          <div class="stat-icon" [style.background]="stat.color">
+            <mat-icon>{{ stat.icon }}</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stat.number }}</h3>
+            <p>{{ stat.label }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compact Product Listings -->
+  <section class="listings-modern">
+    <div class="container">
+      <div class="listings-header">
+        <div>
+          <h2>Featured Items</h2>
+          <p>Handpicked products from trusted sellers</p>
+        </div>
+        <button mat-button routerLink="/marketplace" class="view-all">
+          View All
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+      
+      <div class="products-grid">
+        <div 
+          *ngFor="let listing of featuredListings; let i = index"
+          class="product-card"
+          [style.--delay]="i * 0.1 + 's'"
+          (click)="onListingClick(listing)">
+          
+          <div class="product-image">
+            <img [src]="listing.image" [alt]="listing.title">
+            
+            <!-- Badges -->
+            <div class="product-badges">
+              <span class="category">{{ listing.category }}</span>
+              <span class="condition">{{ listing.condition }}</span>
+              <span class="verified" *ngIf="listing.isVerified">
+                <mat-icon>verified</mat-icon>
+                Verified
+              </span>
+            </div>
+            
+            <!-- Discount -->
+            <div class="discount" *ngIf="listing.originalPrice">
+              -{{ getDiscountPercentage(listing.originalPrice, listing.price) }}%
+            </div>
+            
+            <!-- Stats -->
+            <div class="product-stats">
+              <span class="views">
+                <mat-icon>visibility</mat-icon>
+                {{ listing.views }}
+              </span>
+              <span class="likes">
+                <mat-icon>favorite</mat-icon>
+                {{ listing.likes }}
+              </span>
+            </div>
+          </div>
+          
+          <div class="product-content">
+            <h3 class="product-title">{{ listing.title }}</h3>
+            
+            <!-- Seller Info -->
+            <div class="seller-info">
+              <img [src]="'https://ui-avatars.com/api/?name=' + listing.sellerName.replace(' ', '+') + '&background=667eea&color=fff&size=32'" 
+                   [alt]="listing.sellerName" class="seller-avatar">
+              <div class="seller-details">
+                <span class="seller-name">{{ listing.sellerName }}</span>
+                <div class="seller-rating">
+                  <mat-icon>star</mat-icon>
+                  <span>{{ listing.sellerRating }} ({{ listing.sellerReviews }})</span>
+                </div>
+              </div>
+              <span class="time-posted">{{ listing.timePosted }}</span>
+            </div>
+            
+            <!-- Location -->
+            <div class="location">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ listing.location }}</span>
+            </div>
+            
+            <!-- Price -->
+            <div class="price-section">
+              <div class="current-price">{{ formatPrice(listing.price) }}</div>
+              <div class="price-info" *ngIf="listing.originalPrice">
+                <span class="original-price">{{ formatPrice(listing.originalPrice) }}</span>
+                <span class="savings">Save {{ formatPrice(listing.originalPrice - listing.price) }}</span>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="product-actions">
+              <button 
+                mat-raised-button 
+                (click)="addToCart(listing); $event.stopPropagation()"
+                class="add-cart">
+                <mat-icon>shopping_cart</mat-icon>
+                Add to Cart
+              </button>
+              <button 
+                mat-icon-button 
+                (click)="contactSeller(listing); $event.stopPropagation()"
+                class="contact"
+                matTooltip="Contact Seller">
+                <mat-icon>chat</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-modern">
+    <div class="container">
+      <div class="section-header">
+        <h2>Success Stories</h2>
+        <p>What our community says</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div 
+          *ngFor="let story of successStories; let i = index"
+          class="testimonial-card"
+          [style.--delay]="i * 0.3 + 's'">
+          <div class="testimonial-rating">
+            <mat-icon *ngFor="let star of [1,2,3,4,5]">star</mat-icon>
+          </div>
+          <blockquote>"{{ story.review }}"</blockquote>
+          <div class="testimonial-author">
+            <img [src]="story.avatar" [alt]="story.buyerName">
+            <div>
+              <strong>{{ story.buyerName }}</strong>
+              <span>bought {{ story.item }} from {{ story.sellerName }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

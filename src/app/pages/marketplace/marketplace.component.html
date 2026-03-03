@@ -1,0 +1,61 @@
+<div *ngIf="showBannerAlert"
+     [ngClass]="{'marketplace-banner-alert': true, 'marketplace-banner-success': alertType === 'success', 'marketplace-banner-error': alertType === 'error'}">
+  <span class="marketplace-banner-text">{{ alertMsg }}</span>
+  <button class="marketplace-banner-close" (click)="closeBannerAlert()" title="Close">×</button>
+</div>
+
+<div class="marketplace-filters">
+  <label>
+    Category:
+    <select [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+      <option [ngValue]="null">All</option>
+      <option *ngFor="let cat of categories" [ngValue]="cat.id">{{ cat.name }}</option>
+    </select>
+  </label>
+  <label>
+    Min Price:
+    <input type="number" [(ngModel)]="minPrice" (change)="applyPriceFilter()" min="0" placeholder="Min" />
+  </label>
+  <label>
+    Max Price:
+    <input type="number" [(ngModel)]="maxPrice" (change)="applyPriceFilter()" min="0" placeholder="Max" />
+  </label>
+</div>
+
+<div *ngIf="isLoading" class="products-loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="products-grid" *ngIf="!isLoading && displayedProducts.length > 0">
+  <mat-card *ngFor="let product of displayedProducts" class="product-tile">
+    <div class="tile-image-wrap">
+      <img [src]="getImageUrl(product.images[0])"
+           alt="{{product.name}}"
+           class="tile-image"
+           (error)="onImgError($event)" />
+      <div *ngIf="product.status === 'Featured'" class="tile-badge">
+        <mat-icon>star</mat-icon> Featured
+      </div>
+    </div>
+    <div class="tile-content">
+      <div class="tile-title-row">
+        <h3 class="tile-title" matTooltip="{{ product.name }}">{{ product.name }}</h3>
+        <span class="tile-condition" [ngClass]="product.status">{{ product.status }}</span>
+      </div>
+      <div class="tile-price">{{ formatPrice(product.price) }}</div>
+      <div class="tile-meta">
+        <span class="tile-category"><mat-icon>category</mat-icon> {{ getCategoryName(product.categoryId) }}</span>
+      </div>
+      <button mat-stroked-button color="primary" class="tile-btn" (click)="orderNow(product)">
+        <mat-icon>shopping_cart_checkout</mat-icon>
+        Order now
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<div *ngIf="!isLoading && displayedProducts.length === 0">
+  <div class="no-products">
+    No products to show.
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<!-- Clean Professional Footer -->
+<footer class="canto-footer-clean">
+  
+  <!-- Main Footer Content -->
+  <div class="footer-main">
+    <div class="footer-container">
+      
+      <!-- Footer Top Section -->
+      <div class="footer-top">
+        
+        <!-- Company Info -->
+        <div class="footer-section company-section">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <mat-icon>shopping_cart</mat-icon>
+            </div>
+            <div class="logo-content">
+              <h3 class="logo-text">Dealio</h3>
+              <p class="logo-tagline">Premium Marketplace</p>
+            </div>
+          </div>
+          
+          <p class="company-description">
+            Discover amazing products from trusted sellers worldwide. 
+            Your one-stop destination for everything you need.
+          </p>
+          
+          <!-- Social Media Links -->
+          <div class="social-links">
+            <h4 class="social-title">Follow Us</h4>
+            <div class="social-icons">
+              <button 
+                *ngFor="let social of socialLinks"
+                mat-icon-button
+                (click)="onSocialClick(social.url)"
+                class="social-icon-btn"
+                [matTooltip]="social.label">
+                <mat-icon>{{ social.icon }}</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Company Links -->
+        <div class="footer-section links-section">
+          <h4 class="section-title">Company</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of footerLinks.company">
+              <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Support Links -->
+        <div class="footer-section links-section">
+          <h4 class="section-title">Support</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of footerLinks.support">
+              <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Business Links -->
+        <div class="footer-section links-section">
+          <h4 class="section-title">Business</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of footerLinks.business">
+              <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Newsletter Section -->
+        <div class="footer-section newsletter-section">
+          <h4 class="section-title">Stay Updated</h4>
+          <p class="newsletter-description">
+            Get the latest deals and updates delivered to your inbox.
+          </p>
+          
+          <div class="newsletter-form">
+            <div class="email-input-wrapper">
+              <mat-icon class="email-icon">email</mat-icon>
+              <input 
+                type="email" 
+                placeholder="Enter your email"
+                class="email-input">
+              <button 
+                (click)="onNewsletterSubmit()"
+                class="subscribe-btn"
+                matTooltip="Subscribe">
+                <mat-icon>send</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-container">
+      
+      <mat-divider class="footer-divider"></mat-divider>
+      
+      <div class="footer-bottom-content">
+        
+        <!-- Copyright -->
+        <div class="copyright-section">
+          <p class="copyright-text">
+            © {{ currentYear }}Dealio Marketplace. All rights reserved. 
+            <span class="developed-by">Developed with ❤️ by MAT Company</span>
+          </p>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</footer>
